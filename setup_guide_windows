@@ -1,0 +1,178 @@
+# Mental Health Progress Tracker - Windows Setup Guide
+
+## Prerequisites Installation
+
+1. Install Node.js:
+
+   - Download Node.js from: https://nodejs.org/en/download/
+   - Choose Windows Installer (.msi) - 64-bit
+   - Run the installer and follow installation steps
+   - Verify installation by opening Command Prompt:
+
+   ```bash
+   node --version
+   npm --version
+   ```
+
+2. Install Git:
+   - Download Git from: https://git-scm.com/download/win
+   - Run the installer with default options
+   - Verify installation:
+   ```bash
+   git --version
+   ```
+
+## Project Setup
+
+1. Create a project directory:
+
+```bash
+# Open Command Prompt
+cd Desktop
+mkdir mental-health-tracker
+cd mental-health-tracker
+```
+
+2. Clone or Extract Project:
+
+   Option 1 - Using Git:
+
+   ```bash
+   git clone [repository-URL]
+   ```
+
+   Option 2 - Using ZIP:
+
+   - Extract the ZIP file to `mental-health-tracker` folder
+
+3. Backend Setup:
+
+```bash
+cd backend
+npm install
+
+# Create .env file
+echo JWT_SECRET=your_secret_key_here > .env
+echo PORT=5000 >> .env
+```
+
+4. Frontend Setup:
+
+```bash
+cd ../frontend
+npm install
+```
+
+## Running the Application
+
+1. Start Backend:
+
+```bash
+# Open Command Prompt
+cd mental-health-tracker\backend
+npm start
+```
+
+2. Start Frontend (in new Command Prompt):
+
+```bash
+# Open another Command Prompt
+cd mental-health-tracker\frontend
+npm run dev
+```
+
+## Common Issues & Solutions
+
+1. Port 5000 in use:
+
+```bash
+# Open Command Prompt as Administrator
+netstat -ano | findstr :5000
+taskkill /PID [PID_NUMBER] /F
+```
+
+2. Node modules issues:
+
+```bash
+# In backend folder
+rd /s /q node_modules
+npm install
+
+# In frontend folder
+rd /s /q node_modules
+npm install
+```
+
+3. Database reset:
+
+```bash
+# In backend folder
+del database.sqlite
+npm start
+```
+
+## File Structure
+
+```
+mental-health-tracker/
+├── backend/
+│   ├── node_modules/
+│   ├── src/
+│   ├── .env
+│   └── package.json
+└── frontend/
+    ├── node_modules/
+    ├── src/
+    └── package.json
+```
+
+## Environment Variables
+
+Create `.env` file in backend folder:
+
+```
+JWT_SECRET=your_secret_key_here
+PORT=5000
+```
+
+## Verifying Installation
+
+1. Backend running correctly if you see:
+
+   - "Database synced"
+   - "Server running on port 5000"
+
+2. Frontend running correctly if you see:
+
+   - URL like http://localhost:5173
+
+3. Test in browser:
+   - Open http://localhost:5173
+   - Register a new account
+   - Try logging in
+   - Create a daily log
+
+## Package Scripts
+
+Backend (package.json):
+
+```json
+{
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  }
+}
+```
+
+Frontend (package.json):
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  }
+}
+```
